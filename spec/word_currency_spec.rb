@@ -3,7 +3,7 @@ RSpec.describe WordCurrency do
     expect(WordCurrency::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "should convert amount less than 1000" do
+    expect(WordCurrency::Converter.convert(123)).to eq("One Hundred and Twenty Three Dollars")
   end
 end
