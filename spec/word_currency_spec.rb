@@ -4,6 +4,6 @@ RSpec.describe WordCurrency do
   end
 
   it "should convert amount less than 1000" do
-    expect(WordCurrency::Converter.convert(123)).to eq("One Hundred and Twenty Three Dollars")
+    expect(WordCurrency::Converter.convert(123)).to eq("one hundred and twenty three Dollars")
   end
 end
