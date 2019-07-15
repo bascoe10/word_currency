@@ -43,10 +43,10 @@ class WordCurrency::Converter
                     CONVERSION[first] + " hundred and " + CONVERSION[second+"0"] + " " + CONVERSION[third] + " Dollars"
                 end
             elsif first && second
-                if first+second > "1" && first+second < "20"
+                if first+second > "1" && first+second < "21"
                     CONVERSION[first+second] + " Dollars"
                 else
-                    CONVERSION[second+"0"] + " " + CONVERSION[third] + " Dollars"
+                    CONVERSION[first+"0"] + " " + CONVERSION[second] + " Dollars"
                 end
             elsif first
                 CONVERSION[first] + " Dollars"

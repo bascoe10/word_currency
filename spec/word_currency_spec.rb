@@ -5,7 +5,7 @@ RSpec.describe WordCurrency do
 
   describe '#convert' do
 
-    context 'conversion from 1 to 19' do
+    let(:conversion_map) {
       {
         "1"  => "one",
         "2"  => "two",
@@ -25,10 +25,32 @@ RSpec.describe WordCurrency do
         "16" => "sixteen",
         "17" => "seventeen",
         "18" => "eighteen",
-        "19" => "nineteen"
-      }.each do |number, number_word|
+        "19" => "nineteen",
+        "20" => "twenty",
+        "30" => "thirty",
+        "40" => "fourty",
+        "50" => "fifty",
+        "60" => "sixty",
+        "70" => "seventy",
+        "80" => "eighty",
+        "90" => "ninety",
+        "00" => "hundred"
+      }
+    }
+
+    context 'conversion from 1 to 20' do
+      (1..19).each do |number|
         it "should convert number #{number} correctly" do
-          expect(WordCurrency::Converter.convert(number)).to eq("#{number_word} Dollars")
+          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[number.to_s]} Dollars")
+        end
+      end
+    end
+
+    context 'conversion from 20 to 99' do
+      (26..36).each do |number|
+        it "should convert number #{number} correctly" do
+          tens_place, ones_place = number.to_s.split("")
+          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[tens_place+"0"]} #{conversion_map[ones_place]} Dollars")
         end
       end
     end
