@@ -37,7 +37,7 @@ class WordCurrency::Converter
             *rest, first, second, third = str_amount.split("")
             
             if first && second && third
-                if second+third > "1" && second+third < "20"
+                if second+third > "1" && second+third < "21"
                     CONVERSION[first] + " hundred and " + CONVERSION[second+third] + " Dollars"
                 else
                     CONVERSION[first] + " hundred and " + CONVERSION[second+"0"] + " " + CONVERSION[third] + " Dollars"
