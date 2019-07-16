@@ -47,10 +47,10 @@ RSpec.describe WordCurrency do
     end
 
     context 'conversion from 20 to 99' do
-      (26..36).each do |number|
+      (20..99).each do |number|
         it "should convert number #{number} correctly" do
           tens_place, ones_place = number.to_s.split("")
-          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[tens_place+"0"]} #{conversion_map[ones_place]} Dollars")
+          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[tens_place+"0"]}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
         end
       end
     end
