@@ -27,31 +27,47 @@ class WordCurrency::Converter
         "70" => "seventy",
         "80" => "eighty",
         "90" => "ninety",
-        "00" => "hundred"
     }
 
     class << self
         def convert(amount)
             str_amount = amount.to_s
-            puts str_amount
+            puts str_amount.length
             *rest, first, second, third = str_amount.split("")
             
-            if first && second && third
-                if second+third > "1" && second+third < "20" || third == "0"
-                    CONVERSION[first] + " hundred and " + CONVERSION[second+third] + " Dollars"
-                else
-                    CONVERSION[first] + " hundred and " + CONVERSION[second+"0"] + " " + CONVERSION[third] + " Dollars"
-                end
-            elsif first && second
-                if first+second > "1" && first+second < "20" || second == "0"
-                    CONVERSION[first+second] + " Dollars"
-                else
-                    CONVERSION[first+"0"] + " " + CONVERSION[second] + " Dollars"
-                end
-            elsif first
-                CONVERSION[first] + " Dollars"
+            # if first && second && third
+            #     if second+third > "1" && second+third < "20" || third == "0"
+            #         CONVERSION[first] + " hundred and " + CONVERSION[second+third] + " Dollars"
+            #     else
+            #         CONVERSION[first] + " hundred and " + CONVERSION[second+"0"] + " " + CONVERSION[third] + " Dollars"
+            #     end
+            # elsif first && second
+            #     if first+second > "1" && first+second < "20" || second == "0"
+            #         CONVERSION[first+second] + " Dollars"
+            #     else
+            #         CONVERSION[first+"0"] + " " + CONVERSION[second] + " Dollars"
+            #     end
+            # elsif first
+            #     CONVERSION[first] + " Dollars"
+            # else
+            #     "Error"
+            # end
+
+            translated = convert_ten_base(first, second)
+            translated + " Dollars"
+        end
+
+
+        def convert_hundred_base(hundreds, tens, ones)
+            "#{CONVERSION[hundreds]} hundred #{convert_ten_base(tens, ones)}" 
+        end
+
+        def convert_ten_base(tens, ones)
+            full_num = "#{tens}#{ones}"
+            if full_num.to_i > 0 && full_num.to_i < 20
+                CONVERSION[full_num]
             else
-                "Error"
+                CONVERSION[tens+"0"] + " " + CONVERSION[ones]
             end
         end
     end
