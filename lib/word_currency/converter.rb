@@ -53,13 +53,17 @@ class WordCurrency::Converter
             #     "Error"
             # end
 
-            translated = convert_ten_base(first, second)
+            translated = convert_hundred_base(first, second, third)
             translated + " Dollars"
         end
 
 
         def convert_hundred_base(hundreds, tens, ones)
-            "#{CONVERSION[hundreds]} hundred #{convert_ten_base(tens, ones)}" 
+            if ones
+                "#{CONVERSION[hundreds]} hundred #{convert_ten_base(tens, ones)}"
+            else
+                convert_ten_base(hundreds, tens)
+            end
         end
 
         def convert_ten_base(tens, ones)

@@ -38,7 +38,7 @@ RSpec.describe WordCurrency do
     }
 
     context 'conversion from 1 to 20' do
-      (1..10).each do |number|
+      (1..20).each do |number|
         it "should convert number #{number} correctly" do
           expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[number.to_s]} Dollars")
         end
