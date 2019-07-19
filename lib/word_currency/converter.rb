@@ -68,7 +68,7 @@ class WordCurrency::Converter
 
         def convert_ten_base(tens, ones)
             full_num = "#{tens}#{ones}"
-            if full_num.to_i > 0 && full_num.to_i < 20
+            if full_num.to_i > 0 && full_num.to_i < 20 || ones == "0"
                 CONVERSION[full_num]
             else
                 CONVERSION[tens+"0"] + " " + CONVERSION[ones]
