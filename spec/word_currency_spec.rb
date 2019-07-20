@@ -48,22 +48,22 @@ RSpec.describe WordCurrency do
       }
     }
 
-    # context 'conversion from 1 to 20' do
-    #   (1..19).each do |number|
-    #     it "should convert number #{number} correctly" do
-    #       expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[number.to_s]} Dollars")
-    #     end
-    #   end
-    # end
+    context 'conversion from 1 to 20' do
+      (1..19).each do |number|
+        it "should convert number #{number} correctly" do
+          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[number.to_s]} Dollars")
+        end
+      end
+    end
 
-    # context 'conversion from 20 to 99' do
-    #   (20..99).each do |number|
-    #     it "should convert number #{number} correctly" do
-    #       tens_place, ones_place = number.to_s.split("")
-    #       expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[tens_place+"0"]}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
-    #     end
-    #   end
-    # end
+    context 'conversion from 20 to 99' do
+      (20..99).each do |number|
+        it "should convert number #{number} correctly" do
+          tens_place, ones_place = number.to_s.split("")
+          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[tens_place+"0"]}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
+        end
+      end
+    end
 
     context 'conversion from 100 to 120' do
       (100..120).each do |number|
