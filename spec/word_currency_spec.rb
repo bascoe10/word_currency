@@ -74,14 +74,14 @@ RSpec.describe WordCurrency do
       end
     end
 
-    # context 'conversion from 100 to 999' do
-    #   (100..125).each do |number|
-    #     it "should convert number #{number} correctly" do
-    #       hundredth_place, tens_place, ones_place = number.to_s.split("")
-    #       expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[hundredth_place]} hundred#{conversion_map[tens_place+"0"] ? (" and " + conversion_map[tens_place+"0"]) : ""}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
-    #     end
-    #   end
-    # end
+    context 'conversion from 100 to 999' do
+      (121..199).each do |number|
+        it "should convert number #{number} correctly" do
+          hundredth_place, tens_place, ones_place = number.to_s.split("")
+          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[hundredth_place]} hundred and #{conversion_map[tens_place+"0"]}#{conversion_map[ones_place] ? " " + conversion_map[ones_place] : ""} Dollars")
+        end
+      end
+    end
 
   end
 
