@@ -1,3 +1,5 @@
+require 'pry'
+
 RSpec.describe WordCurrency do
   it "has a version number" do
     expect(WordCurrency::VERSION).not_to be nil
@@ -33,32 +35,50 @@ RSpec.describe WordCurrency do
         "60" => "sixty",
         "70" => "seventy",
         "80" => "eighty",
-        "90" => "ninety"
+        "90" => "ninety",
+        "01"  => "one",
+        "02"  => "two",
+        "03"  => "three",
+        "04"  => "four",
+        "05"  => "five",
+        "06"  => "six",
+        "07"  => "seven",
+        "08"  => "eight",
+        "09"  => "nine",
       }
     }
 
-    context 'conversion from 1 to 20' do
-      (1..19).each do |number|
-        it "should convert number #{number} correctly" do
-          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[number.to_s]} Dollars")
-        end
-      end
-    end
+    # context 'conversion from 1 to 20' do
+    #   (1..19).each do |number|
+    #     it "should convert number #{number} correctly" do
+    #       expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[number.to_s]} Dollars")
+    #     end
+    #   end
+    # end
 
-    context 'conversion from 20 to 99' do
-      (20..99).each do |number|
+    # context 'conversion from 20 to 99' do
+    #   (20..99).each do |number|
+    #     it "should convert number #{number} correctly" do
+    #       tens_place, ones_place = number.to_s.split("")
+    #       expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[tens_place+"0"]}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
+    #     end
+    #   end
+    # end
+
+    context 'conversion from 100 to 120' do
+      (100..120).each do |number|
         it "should convert number #{number} correctly" do
-          tens_place, ones_place = number.to_s.split("")
-          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[tens_place+"0"]}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
+          hundredth_place, tens_place, ones_place = number.to_s.split("")
+          expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[hundredth_place]} hundred#{conversion_map[tens_place+ones_place] ? (" and " + conversion_map[tens_place+ones_place]) : ""} Dollars")
         end
       end
     end
 
     # context 'conversion from 100 to 999' do
-    #   (100..105).each do |number|
+    #   (100..125).each do |number|
     #     it "should convert number #{number} correctly" do
     #       hundredth_place, tens_place, ones_place = number.to_s.split("")
-    #       expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[hundredth_place]} hundred#{conversion_map[tens_place+"0"] ? (" " + conversion_map[tens_place+"0"]) : ""}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
+    #       expect(WordCurrency::Converter.convert(number)).to eq("#{conversion_map[hundredth_place]} hundred#{conversion_map[tens_place+"0"] ? (" and " + conversion_map[tens_place+"0"]) : ""}#{conversion_map[ones_place] ? (" " + conversion_map[ones_place]) : ""} Dollars")
     #     end
     #   end
     # end

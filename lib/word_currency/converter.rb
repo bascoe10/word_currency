@@ -27,6 +27,15 @@ class WordCurrency::Converter
         "70" => "seventy",
         "80" => "eighty",
         "90" => "ninety",
+        "01"  => "one",
+        "02"  => "two",
+        "03"  => "three",
+        "04"  => "four",
+        "05"  => "five",
+        "06"  => "six",
+        "07"  => "seven",
+        "08"  => "eight",
+        "09"  => "nine",
     }
 
     class << self
@@ -60,7 +69,8 @@ class WordCurrency::Converter
 
         def convert_hundred_base(hundreds, tens, ones)
             if ones
-                "#{CONVERSION[hundreds]} hundred #{convert_ten_base(tens, ones)}"
+                base = convert_ten_base(tens, ones)
+                base ? "#{CONVERSION[hundreds]} hundred and #{convert_ten_base(tens, ones)}" : "#{CONVERSION[hundreds]} hundred"
             else
                 convert_ten_base(hundreds, tens)
             end
