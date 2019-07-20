@@ -1,5 +1,5 @@
 class WordCurrency::Converter
-    CONVERSION = {
+    CONVERSION_TABLE = {
         "1"  => "one",
         "2"  => "two",
         "3"  => "three",
@@ -46,18 +46,18 @@ class WordCurrency::Converter
             
             # if first && second && third
             #     if second+third > "1" && second+third < "20" || third == "0"
-            #         CONVERSION[first] + " hundred and " + CONVERSION[second+third] + " Dollars"
+            #         CONVERSION_TABLE[first] + " hundred and " + CONVERSION_TABLE[second+third] + " Dollars"
             #     else
-            #         CONVERSION[first] + " hundred and " + CONVERSION[second+"0"] + " " + CONVERSION[third] + " Dollars"
+            #         CONVERSION_TABLE[first] + " hundred and " + CONVERSION_TABLE[second+"0"] + " " + CONVERSION_TABLE[third] + " Dollars"
             #     end
             # elsif first && second
             #     if first+second > "1" && first+second < "20" || second == "0"
-            #         CONVERSION[first+second] + " Dollars"
+            #         CONVERSION_TABLE[first+second] + " Dollars"
             #     else
-            #         CONVERSION[first+"0"] + " " + CONVERSION[second] + " Dollars"
+            #         CONVERSION_TABLE[first+"0"] + " " + CONVERSION_TABLE[second] + " Dollars"
             #     end
             # elsif first
-            #     CONVERSION[first] + " Dollars"
+            #     CONVERSION_TABLE[first] + " Dollars"
             # else
             #     "Error"
             # end
@@ -70,7 +70,7 @@ class WordCurrency::Converter
         def convert_hundred_base(hundreds, tens, ones)
             if ones
                 base = convert_ten_base(tens, ones)
-                base ? "#{CONVERSION[hundreds]} hundred and #{convert_ten_base(tens, ones)}" : "#{CONVERSION[hundreds]} hundred"
+                base ? "#{CONVERSION_TABLE[hundreds]} hundred and #{convert_ten_base(tens, ones)}" : "#{CONVERSION_TABLE[hundreds]} hundred"
             else
                 convert_ten_base(hundreds, tens)
             end
@@ -79,9 +79,9 @@ class WordCurrency::Converter
         def convert_ten_base(tens, ones)
             full_num = "#{tens}#{ones}"
             if full_num.to_i > 0 && full_num.to_i < 20 || ones == "0"
-                CONVERSION[full_num]
+                CONVERSION_TABLE[full_num]
             else
-                CONVERSION[tens+"0"] + " " + CONVERSION[ones]
+                CONVERSION_TABLE[tens+"0"] + " " + CONVERSION_TABLE[ones]
             end
         end
     end
